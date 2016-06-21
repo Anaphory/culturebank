@@ -23,7 +23,7 @@ from clld.lib.bibtex import Database
 from clld.web.icon import ORDERED_ICONS
 from clld.scripts.util import bibtex2source
 
-from localglottolog import LocalGlottolog
+from clldclient.glottolog import Glottolog as LocalGlottolog
 
 import grambank
 from grambank.models import GrambankLanguage, Feature, GrambankContribution
