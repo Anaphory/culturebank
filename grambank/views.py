@@ -26,7 +26,7 @@ def stability(req):
     return {'data': fs}
 
 def dependencys(req):
-    print "ANAL"
+    print("ANAL")
     deps = jsonload(abspath_from_asset_spec('grambank:static/dependencies.json'))
     #lfv = DBSession.query(Value).join(Value.valueset)\
     #        .options(
@@ -39,7 +39,7 @@ def dependencys(req):
     return {'data': deps}
 
 def dependencies(req):
-    print "HEJ"
+    print("HEJ")
     deps = jsonload(abspath_from_asset_spec('grambank:static/dependencies.json'))
     #lfv = DBSession.query(Value).join(Value.valueset)\
     #        .options(
@@ -52,7 +52,7 @@ def dependencies(req):
     return {'data': deps}
 
 def dependency(req):
-    print "HEJ2"
+    print("HEJ2")
     deps = jsonload(abspath_from_asset_spec('grambank:static/dependencies.json'))
     #lfv = DBSession.query(Value).join(Value.valueset)\
     #        .options(
@@ -90,7 +90,7 @@ def coverage(req):
     gb_langs = set([r[0] for r in DBSession.query(Language.id)])
 
     cstats = OrderedDict()
-    for fid, spec in sorted(gl.items(), key=lambda k: k[1]['name']):
+    for fid, spec in sorted(list(gl.items()), key=lambda k: k[1]['name']):
         d = dict(
             macroareas=spec['macroareas'],
             grammar=Counter(),
@@ -106,7 +106,7 @@ def coverage(req):
             if gb_langs.intersection(set(spec['extension'])):
                 d[spec['doctype']].update(['grambank'])
                 d['total'].update(['grambank'])
-        for sfid, sub in spec.get('subgroups', {}).items():
+        for sfid, sub in list(spec.get('subgroups', {}).items()):
             if not sub.get('subgroups'):
                 sub['name'] = '%s*' % sub['name']
             d[sub['doctype']].update(['glottolog'])
@@ -127,7 +127,7 @@ def coverage(req):
                 if gb_langs.intersection(set(sub['extension'])):
                     d['subgroups'][(sfid, sub['name'])][sub['doctype']].update(['grambank'])
                     d['subgroups'][(sfid, sub['name'])]['total'].update(['grambank'])
-            for ssfid, ssub in sub.get('subgroups', {}).items():
+            for ssfid, ssub in list(sub.get('subgroups', {}).items()):
                 if ssub['doctype']:
                     d['subgroups'][(sfid, sub['name'])][ssub['doctype']].update(['glottolog'])
                     d['subgroups'][(sfid, sub['name'])]['total'].update(['glottolog'])

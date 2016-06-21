@@ -5,7 +5,7 @@ This module is also used to lookup custom template context providers, i.e. funct
 following a special naming convention which are called to update the template context
 before rendering resource's detail or index views.
 """
-from __future__ import division, unicode_literals
+
 
 from sqlalchemy import func, desc, text
 
@@ -14,7 +14,7 @@ from clld.web.util.helpers import get_referents
 from clld.web.util.htmllib import HTML
 from clld.db.meta import DBSession
 from clld.db.models.common import Contributor, ValueSet, Contribution, ContributionContributor
-from models import Dependency, Transition
+from .models import Dependency, Transition
 
 from clld.web.icon import SHAPES
 from clld.interfaces import IIcon
@@ -83,11 +83,11 @@ def stability_detail_html(context=None, request=None, **kw):
     def norm(d):
         z = float(sum(d.values()))
         if z == 0.0:
-            return dict([(k, v) for (k, v) in d.iteritems()])
-        return dict([(k, v/z) for (k, v) in d.iteritems()])
+            return dict([(k, v) for (k, v) in d.items()])
+        return dict([(k, v/z) for (k, v) in d.items()])
     
     def transition_counts_to_matrix(u):
-        kall = set([k for ks in u.iterkeys() for k in ks])
+        kall = set([k for ks in u.keys() for k in ks])
         ks = dict([(k1, norm(dict([(k2, u.get((k1, k2), 0)) for k2 in kall]))) for k1 in kall])
         return ks
     
@@ -104,9 +104,9 @@ def stability_detail_html(context=None, request=None, **kw):
     transitions = DBSession.query(Transition.fromvalue, Transition.tovalue).filter(Transition.stability_pk == context.pk)
     u = trcount(transitions)
     m = transition_counts_to_matrix(u)
-    vtotal = sumk([(k1, v) for ((k1, k2), v) in u.iteritems()])
-    retentions = dict([(k1, v) for ((k1, k2), v) in u.iteritems() if k1 == k2])
-    scounts = [(k, v, vtotal.get(k, 0)) for (k, v) in sorted(retentions.iteritems())] + [("Total", sum(retentions.values()), sum(u.values()))]
+    vtotal = sumk([(k1, v) for ((k1, k2), v) in u.items()])
+    retentions = dict([(k1, v) for ((k1, k2), v) in u.items() if k1 == k2])
+    scounts = [(k, v, vtotal.get(k, 0)) for (k, v) in sorted(retentions.items())] + [("Total", sum(retentions.values()), sum(u.values()))]
     s = [(k, v, t, ("%.5f" % (float(v)/t)) if t > 0 else "-") for (k, v, t) in scounts]
     return {'transition_counts': u, 'transition_matrix': m, 'stability_table': s, 'state_total': vtotal}
 
@@ -118,7 +118,7 @@ def deepfamily_detail_html(request=None, context=None, **kw):
     #family2_longitude = Column(
     #family2_latitude = Column(
     #[context.pk] +
-    icon_map = dict(zip([context.family1_pk, context.family2_pk], [s + c for s in SHAPES for c in COLORS]))
+    icon_map = dict(list(zip([context.family1_pk, context.family2_pk], [s + c for s in SHAPES for c in COLORS])))
     for key in icon_map:
         icon_map[key] = request.registry.getUtility(IIcon, icon_map[key]).url(request)
     return dict(icon_map=icon_map, lmap=DeepFamilyMap(context, request, icon_map=icon_map))

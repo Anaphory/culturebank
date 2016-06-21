@@ -17,7 +17,7 @@ from clld.db.models.common import (
 )
 from clld_glottologfamily_plugin.models import HasFamilyMixin, Family
 
-from interfaces import IDependency, ITransition, IStability, IDeepFamily, ISupport, IHasSupport
+from .interfaces import IDependency, ITransition, IStability, IDeepFamily, ISupport, IHasSupport
 
 @implementer(interfaces.ILanguage)
 class GrambankLanguage(CustomModelMixin, Language, HasFamilyMixin):

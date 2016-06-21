@@ -86,7 +86,7 @@ if __name__ == '__main__':
 
 
     stats = defaultdict(lambda: defaultdict(list))
-    for fid, f in res.items():
+    for fid, f in list(res.items()):
         for maname, maid in f['macroareas']:
             stats[maid][f['doctype']].append(fid)
     
@@ -97,5 +97,5 @@ if __name__ == '__main__':
     with open('stats_macroareas.json', 'wb') as fp:
         json.dump(macroareas, fp)
 
-    print log
+    print(log)
     sys.exit(0)

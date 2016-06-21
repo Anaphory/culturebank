@@ -12,7 +12,7 @@ from clld.web.datatables.contributor import Contributors, NameCol
 from clld_glottologfamily_plugin.datatables import Familys, MacroareaCol, FamilyLinkCol, GlottologUrlCol
 from clld_glottologfamily_plugin.models import Family
 
-from models import GrambankLanguage, Feature, Dependency, Transition, Stability, DeepFamily, Support, HasSupport
+from .models import GrambankLanguage, Feature, Dependency, Transition, Stability, DeepFamily, Support, HasSupport
 from clld.web.util.helpers import link
 
 class FeatureIdCol(IdCol):

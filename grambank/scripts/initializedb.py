@@ -1,4 +1,4 @@
-from __future__ import unicode_literals, print_function
+
 import sys
 import os
 
@@ -16,7 +16,7 @@ from grambank.scripts.util import (
     GLOTTOLOG_REPOS, GRAMBANK_REPOS,
 )
 
-from stats_util import grp, feature_stability, feature_dependencies, dependencies_graph, deep_families, havdist
+from .stats_util import grp, feature_stability, feature_dependencies, dependencies_graph, deep_families, havdist
 from grambank.models import Dependency, Transition, Stability, DeepFamily, Support, HasSupport, Feature
 
 
@@ -41,13 +41,13 @@ def main(args):
     ##import_cldf("C:\\python27\\dbs\\bwohh\\", data, add_missing_features = True)
     load_families(
         data,
-        data['GrambankLanguage'].values(),
+        list(data['GrambankLanguage'].values()),
         glottolog=Glottolog(GLOTTOLOG_REPOS),
         isolates_icon='tcccccc')
 
     #Add isolates
     glottolog=Glottolog(GLOTTOLOG_REPOS)
-    for lg in data['GrambankLanguage'].values():
+    for lg in list(data['GrambankLanguage'].values()):
         gl_language = glottolog.languoid(lg.id)
         if not gl_language.family:
             family = data.add(Family, gl_language.id, id = gl_language.id, name = gl_language.name, description=common.Identifier(name=gl_language.id, type=common.IdentifierType.glottolog.value).url(), jsondata={"icon": 'tcccccc'})
@@ -74,14 +74,14 @@ where v.valueset_pk = vs.pk and vs.language_pk = l.pk and vs.parameter_pk = p.pk
     datatriples = [(v[0], v[1], v[2]) for v in DBSession.execute(sql)]
     _s = checkpoint(_s, '%s values loaded' % len(datatriples))
 
-    flv = dict([(feature, dict(lvs)) for (feature, lvs) in grp([(f, l, v) for (l, f, v) in datatriples]).iteritems()])
+    flv = dict([(feature, dict(lvs)) for (feature, lvs) in grp([(f, l, v) for (l, f, v) in datatriples]).items()])
     _s = checkpoint(_s, 'triples grouped')
 
     clfps = get_clf_paths([row[0] for row in DBSession.execute("select id from language")])
     _s = checkpoint(_s, '%s clfps loaded' % len(clfps))
 
     features = {f.id: f for f in DBSession.query(Feature)}
-    for (f, lv) in flv.iteritems():
+    for (f, lv) in flv.items():
         features[f].representation = len(lv)
     DBSession.flush()
     _s = checkpoint(_s, 'representation assigned')
@@ -120,7 +120,7 @@ where v.valueset_pk = vs.pk and vs.language_pk = l.pk and vs.parameter_pk = p.pk
         _s = checkpoint(_s, 'dependencies_graph written')
 
         for (i, ((v, dstats), f1, f2)) in enumerate(imps):
-            combinatory_status = ("primary" if H.has_key((f1, f2)) else ("epiphenomenal" if v > 0.0 else None)) if H else "N/A"
+            combinatory_status = ("primary" if (f1, f2) in H else ("epiphenomenal" if v > 0.0 else None)) if H else "N/A"
             DBSession.add(Dependency(
                 id="%s->%s" % (f1, f2),
                 strength=v,

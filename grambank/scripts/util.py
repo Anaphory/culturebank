@@ -1,4 +1,4 @@
-from __future__ import unicode_literals
+
 import os
 import re
 from collections import OrderedDict
@@ -86,7 +86,7 @@ def import_dataset(path, data, icons, add_missing_features = False):
             if add_missing_features:
                 parameter = data.add(Feature, row['Feature_ID'], id=row['Feature_ID'], name=row.get('Feature', row['Feature_ID']))
             else: 
-                print('skip value for invalid feature %s' % row['Feature_ID'])
+                print(('skip value for invalid feature %s' % row['Feature_ID']))
                 continue
 
         language = data['GrambankLanguage'].get(row['Language_ID'])
@@ -95,7 +95,7 @@ def import_dataset(path, data, icons, add_missing_features = False):
             try:
                 languoid = glottolog.languoid(row['Language_ID'])
 	    except AttributeError: 
-                print('Skipping, no Glottocode found for %s' % row['Language_ID'])
+                print(('Skipping, no Glottocode found for %s' % row['Language_ID']))
                 continue
             
             gl_md = {
@@ -143,7 +143,7 @@ def import_dataset(path, data, icons, add_missing_features = False):
             description=row['Comment'],
             domainelement=domain.get(row['Value']))
 
-        for key, src in data['Source'].items():
+        for key, src in list(data['Source'].items()):
             if key in vs.source:
                 ValueSetReference(valueset=vs, source=src, key=key)
 
@@ -159,9 +159,9 @@ def import_cldf(srcdir, data, add_missing_features = False):
             if os.path.splitext(fname)[1] in ['.tsv', '.csv']:
                 try:
                     import_dataset(os.path.join(dirpath, fname), data, icons, add_missing_features = add_missing_features)
-                    print os.path.join(dirpath, fname)
+                    print(os.path.join(dirpath, fname))
                 except:
-                    print 'ERROR'
+                    print('ERROR')
                     raise
                 #break
 
@@ -181,7 +181,7 @@ class FeatureSpec(object):
                         number, desc = m.split(':')
                         yield number.strip(), desc.strip()
         except:
-            print s
+            print(s)
             raise
 
     def __init__(self, d):
@@ -205,7 +205,7 @@ class FeatureSpec(object):
         self.domain.update({'?': 'Not known'})
 
     def format_domain(self):
-        return '; '.join('%s: %s' % item for item in self.domain.items() if item[0] != '?')
+        return '; '.join('%s: %s' % item for item in list(self.domain.items()) if item[0] != '?')
 
 
 def import_features_collaborative_sheet(datadir, data):
