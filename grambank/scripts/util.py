@@ -94,7 +94,7 @@ def import_dataset(path, data, icons, add_missing_features = False):
             # query glottolog!
             try:
                 languoid = glottolog.languoid(row['Language_ID'])
-	    except AttributeError: 
+            except AttributeError:
                 print(('Skipping, no Glottocode found for %s' % row['Language_ID']))
                 continue
             
@@ -117,7 +117,7 @@ def import_dataset(path, data, icons, add_missing_features = False):
                 longitude=gl_md.get('longitude'))
 
         domain = {de.abbr: de for de in parameter.domain}    
-	if not domain.get(row['Value']):
+        if not domain.get(row['Value']):
             #print "skipped", row, "not in", domain
             continue
         
