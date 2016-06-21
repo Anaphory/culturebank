@@ -32,11 +32,6 @@ from grambank.models import GrambankLanguage, Feature, GrambankContribution
 GRAMBANK_REPOS = 'C:\\Python27\\glottobank\\Grambank\\' \
     if getpass.getuser() not in ['robert', 'shh\\forkel'] \
     else '/home/shh.mpg.de/forkel/venvs/grambank/Grambank'
-GLOTTOLOG_REPOS = Path(grambank.__file__).parent.parent.parent.parent.joinpath(
-    'glottolog3', 'glottolog') \
-    if getpass.getuser() in ['robert', 'shh\\forkel'] \
-    else Path('C:\\Python27\\glottolog\\')  # add your path to the glottolog repos clone here!
-
 
 def import_dataset(path, data, icons, add_missing_features = False):
     # look for metadata
@@ -224,10 +219,10 @@ def import_features_collaborative_sheet(datadir, data):
 
 
 def get_clf_paths(lgs):
-    glottolog = Glottolog(GLOTTOLOG_REPOS)
+    glottolog = Glottolog()
     return [
         tuple([ll.id for ll in l.ancestors] + [l.id]) for l in glottolog.languoids(lgs)]
 
 
 def get_names():
-    return {l.id: l.name for l in Glottolog(GLOTTOLOG_REPOS).languoids()}
+    return {l.id: l.name for l in Glottolog().languoids()}

@@ -13,7 +13,7 @@ from pyglottolog.api import Glottolog
 import grambank
 from grambank.scripts.util import (
     import_features_collaborative_sheet, import_cldf, get_clf_paths, get_names,
-    GLOTTOLOG_REPOS, GRAMBANK_REPOS,
+    GRAMBANK_REPOS,
 )
 
 from stats_util import grp, feature_stability, feature_dependencies, dependencies_graph, deep_families, havdist
@@ -42,11 +42,11 @@ def main(args):
     load_families(
         data,
         list(data['GrambankLanguage'].values()),
-        glottolog=Glottolog(GLOTTOLOG_REPOS),
+        glottolog=Glottolog(),
         isolates_icon='tcccccc')
 
     #Add isolates
-    glottolog=Glottolog(GLOTTOLOG_REPOS)
+    glottolog=Glottolog()
     for lg in list(data['GrambankLanguage'].values()):
         gl_language = glottolog.languoid(lg.id)
         if not gl_language.family:
