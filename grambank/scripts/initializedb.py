@@ -16,7 +16,7 @@ from grambank.scripts.util import (
     GLOTTOLOG_REPOS, GRAMBANK_REPOS,
 )
 
-from .stats_util import grp, feature_stability, feature_dependencies, dependencies_graph, deep_families, havdist
+from stats_util import grp, feature_stability, feature_dependencies, dependencies_graph, deep_families, havdist
 from grambank.models import Dependency, Transition, Stability, DeepFamily, Support, HasSupport, Feature
 
 
