@@ -45,13 +45,6 @@ def main(args):
         glottolog=Glottolog(),
         isolates_icon='tcccccc')
 
-    #Add isolates
-    glottolog=Glottolog()
-    for lg in list(data['GrambankLanguage'].values()):
-        gl_language = glottolog.languoid(lg.id)
-        if not gl_language.family:
-            family = data.add(Family, gl_language.id, id = gl_language.id, name = gl_language.name, description=common.Identifier(name=gl_language.id, type=common.IdentifierType.glottolog.value).url(), jsondata={"icon": 'tcccccc'})
-            lg.family = family
     return 
 
 def prime_cache(args):
@@ -86,36 +79,39 @@ where v.valueset_pk = vs.pk and vs.language_pk = l.pk and vs.parameter_pk = p.pk
     DBSession.flush()
     _s = checkpoint(_s, 'representation assigned')
 
-    fs = feature_stability(datatriples, clfps)
-    _s = checkpoint(_s, 'feature_stability computed')
-
     glottolog_names = get_names()
     families = {f.id: f for f in DBSession.query(Family)}
-    for (f, (s, transitions, stationarity_p, synchronic_p)) in fs:
-        stability = Stability(
-            id=f.replace("GB", "S"),
-            feature=features[f],
-            parsimony_stability_value=s["stability"],
-            parsimony_retentions=s["retentions"],
-            parsimony_transitions=s["transitions"],
-            jsondata={'diachronic_p': stationarity_p, "synchronic_p": synchronic_p})
-        DBSession.add(stability)
-        for (i, (fam, (fromnode, tonode), (ft, tt))) in enumerate(transitions):
-            DBSession.add(Transition(
-                id="%s: %s->%s" % (f, fromnode, tonode),
-                stability=stability,
-                fromnode=glottolog_names[fromnode],
-                tonode=glottolog_names[tonode],
-                fromvalue=ft,
-                tovalue=tt,
-                family=families[fam],
-                retention_innovation="Retention" if ft == tt else "Innovation"))
+    try:
+        fs = feature_stability(datatriples, clfps)
+        _s = checkpoint(_s, 'feature_stability computed')
+
+        for (f, (s, transitions, stationarity_p, synchronic_p)) in fs:
+            stability = Stability(
+                id=f.replace("GB", "S"),
+                feature=features[f],
+                parsimony_stability_value=s["stability"],
+                parsimony_retentions=s["retentions"],
+                parsimony_transitions=s["transitions"],
+                jsondata={'diachronic_p': stationarity_p, "synchronic_p": synchronic_p})
+            DBSession.add(stability)
+            for (i, (fam, (fromnode, tonode), (ft, tt))) in enumerate(transitions):
+                DBSession.add(Transition(
+                    id="%s: %s->%s" % (f, fromnode, tonode),
+                    stability=stability,
+                    fromnode=glottolog_names[fromnode],
+                    tonode=glottolog_names[tonode],
+                    fromvalue=ft,
+                    tovalue=tt,
+                    family=families[fam],
+                    retention_innovation="Retention" if ft == tt else "Innovation"))
+    except IndexError:
+        pass
     DBSession.flush()
     _s = checkpoint(_s, 'stability and transitions loaded')
 
     imps = feature_dependencies(datatriples)
     _s = checkpoint(_s, 'feature_dependencies computed')
-    if 1:
+    try:
         (H, V) = dependencies_graph([(v, f1, f2) for ((v, dstats), f1, f2) in imps])
         _s = checkpoint(_s, 'dependencies_graph written')
 
@@ -131,6 +127,8 @@ where v.valueset_pk = vs.pk and vs.language_pk = l.pk and vs.parameter_pk = p.pk
                 jsondata=dstats))
         DBSession.flush()
         _s = checkpoint(_s, 'dependencies loaded')
+    except TypeError:
+        pass
 
     coordinates = {
         lg.id: (lg.longitude, lg.latitude)
