@@ -30,7 +30,7 @@ import culturebank
 from culturebank.models import CulturebankLanguage, Feature, CulturebankContribution
 
 
-GRAMBANK_REPOS = "j:/ResearchData/HUM/LUCL-KlamerVICI/sunda_database/culturerumah-data/"
+CULTUREBANK_REPOS = "j:/ResearchData/HUM/LUCL-KlamerVICI/sunda_database/culturerumah-data/"
 
 def import_dataset(path, data, icons, add_missing_features = False):
     # look for metadata

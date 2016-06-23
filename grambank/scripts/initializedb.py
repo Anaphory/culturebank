@@ -13,7 +13,7 @@ from pyglottolog.api import Glottolog
 import culturebank
 from culturebank.scripts.util import (
     import_features_collaborative_sheet, import_cldf, get_clf_paths, get_names,
-    GRAMBANK_REPOS,
+    CULTUREBANK_REPOS,
 )
 
 from stats_util import grp, feature_stability, feature_dependencies, dependencies_graph, deep_families, havdist
@@ -36,8 +36,8 @@ def main(args):
             'license_name': 'No license yet'}) # Creative Commons Attribution 4.0 International License'})
     DBSession.add(dataset)
 
-    import_features_collaborative_sheet(GRAMBANK_REPOS, data)
-    import_cldf(os.path.join(GRAMBANK_REPOS, 'datasets'), data)
+    import_features_collaborative_sheet(CULTUREBANK_REPOS, data)
+    import_cldf(os.path.join(CULTUREBANK_REPOS, 'datasets'), data)
     ##import_cldf("C:\\python27\\dbs\\bwohh\\", data, add_missing_features = True)
 
     load_families(
