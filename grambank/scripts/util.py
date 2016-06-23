@@ -29,9 +29,7 @@ import grambank
 from grambank.models import GrambankLanguage, Feature, GrambankContribution
 
 
-GRAMBANK_REPOS = 'C:\\Python27\\glottobank\\Grambank\\' \
-    if getpass.getuser() not in ['robert', 'shh\\forkel'] \
-    else '/home/shh.mpg.de/forkel/venvs/grambank/Grambank'
+GRAMBANK_REPOS = "p:/My Documents/Database/data/sunda/grambank/"
 
 def import_dataset(path, data, icons, add_missing_features = False):
     # look for metadata
@@ -45,6 +43,7 @@ def import_dataset(path, data, icons, add_missing_features = False):
     try:
         contrib = GrambankContribution(id=basename, name=basename, desc=glottolog.languoid(basename).name)
     except:
+        print("Basename {:s} did not match a glottolog languoid, skipped.".format(basename))
         return
 
     md = {}
@@ -138,9 +137,10 @@ def import_dataset(path, data, icons, add_missing_features = False):
             description=row['Comment'],
             domainelement=domain.get(row['Value']))
 
-        for key, src in list(data['Source'].items()):
-            if key in vs.source:
-                ValueSetReference(valueset=vs, source=src, key=key)
+        if vs.source is not None:
+            for key, src in list(data['Source'].items()):
+                if key in vs.source:
+                    ValueSetReference(valueset=vs, source=src, key=key)
 
 
 def import_cldf(srcdir, data, add_missing_features = False):
