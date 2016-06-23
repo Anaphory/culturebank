@@ -27,7 +27,7 @@ from clld.scripts.util import bibtex2source
 from clldclient.glottolog import Glottolog as LocalGlottolog
 
 import culturebank
-from culturebank.models import GrambankLanguage, Feature, GrambankContribution
+from culturebank.models import CulturebankLanguage, Feature, CulturebankContribution
 
 
 GRAMBANK_REPOS = "j:/ResearchData/HUM/LUCL-KlamerVICI/sunda_database/culturerumah-data/"
@@ -42,7 +42,7 @@ def import_dataset(path, data, icons, add_missing_features = False):
     glottolog = LocalGlottolog()
 
     try:
-        contrib = GrambankContribution(id=basename, name=basename, desc=glottolog.languoid(basename).name)
+        contrib = CulturebankContribution(id=basename, name=basename, desc=glottolog.languoid(basename).name)
     except:
         print("Basename {:s} did not match a glottolog languoid, skipped.".format(basename))
         return
@@ -88,7 +88,7 @@ def import_dataset(path, data, icons, add_missing_features = False):
                 print(('skip value for invalid feature %s' % row['Feature_ID']))
                 continue
 
-        language = data['GrambankLanguage'].get(row['Language_ID'])
+        language = data['CulturebankLanguage'].get(row['Language_ID'])
         if language is None:
             # query glottolog!
             try:
@@ -109,7 +109,7 @@ def import_dataset(path, data, icons, add_missing_features = False):
                     gl_md['longitude'], gl_md['latitude'] = lmd['geometry']['coordinates']
 
             language = data.add(
-                GrambankLanguage, row['Language_ID'],
+                CulturebankLanguage, row['Language_ID'],
                 id=row['Language_ID'],
                 name=gl_md['name'],
                 latitude=gl_md.get('latitude'),

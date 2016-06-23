@@ -54,7 +54,6 @@ GramSunDa is a publication of the
 
 <h3>How to cite GramSunDa Online</h3>
 <p>
-
 </p>
 
 <h3>Terms of use</h3>

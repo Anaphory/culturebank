@@ -12,7 +12,7 @@ from clld.web.datatables.contributor import Contributors, NameCol
 from clld_glottologfamily_plugin.datatables import Familys, MacroareaCol, FamilyLinkCol, GlottologUrlCol
 from clld_glottologfamily_plugin.models import Family
 
-from .models import GrambankLanguage, Feature, Dependency, Transition, Stability, DeepFamily, Support, HasSupport
+from .models import CulturebankLanguage, Feature, Dependency, Transition, Stability, DeepFamily, Support, HasSupport
 from clld.web.util.helpers import link
 
 class FeatureIdCol(IdCol):
@@ -28,7 +28,7 @@ class LanguageIdCol(LinkCol):
         return dict(label=item.id)
 
 
-class GrambankLanguages(Languages):
+class CulturebankLanguages(Languages):
     def base_query(self, query):
         return query.outerjoin(Family)
 
@@ -43,8 +43,8 @@ class GrambankLanguages(Languages):
             Col(self,
                 'longitude',
                 sDescription='<small>The geographic longitude</small>'),
-            MacroareaCol(self, 'region', GrambankLanguage),
-            FamilyLinkCol(self, 'family', GrambankLanguage),
+            MacroareaCol(self, 'macroarea', CulturebankLanguage),
+            FamilyLinkCol(self, 'family', CulturebankLanguage),
         ]
 
 class Stabilities(DataTable):
@@ -248,7 +248,7 @@ class Families(Familys):
             LanguageCountCol(self, 'number of languages in GramBank'),
         ]
 
-class GrambankContributionsCol(Col):
+class CulturebankContributionsCol(Col):
     __kw__ = {'bSearchable': False, 'bSortable': False}
 
     def format(self, item):
@@ -257,11 +257,11 @@ class GrambankContributionsCol(Col):
                 self.dt.req, c.contribution, label="%s [%s]" % (c.contribution.desc, c.contribution.id))) for c in item.contribution_assocs])
 
 
-class GrambankContributors(Contributors):
+class CulturebankContributors(Contributors):
     def col_defs(self):
         return [
             NameCol(self, 'name'),
-            GrambankContributionsCol(self, 'Contributions')
+            CulturebankContributionsCol(self, 'Contributions')
         ]
 
     
@@ -322,10 +322,10 @@ class Datapoints(Values):
 
 def includeme(config):
     config.register_datatable('values', Datapoints)
-    config.register_datatable('languages', GrambankLanguages)
+    config.register_datatable('languages', CulturebankLanguages)
     config.register_datatable('parameters', Features)
     config.register_datatable('dependencys', Dependencies)
-    config.register_datatable('contributors', GrambankContributors)
+    config.register_datatable('contributors', CulturebankContributors)
     config.register_datatable('transitions', Transitions)
     config.register_datatable('stabilitys', Stabilities)
     config.register_datatable('deepfamilys', DeepFamilies)

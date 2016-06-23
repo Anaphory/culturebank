@@ -2,7 +2,7 @@
 Releasing culturebank
 ==================
 
-- Update the glottobank/Grambank repository
+- Update the glottobank/Culturebank repository
 - Run the checks on the data repos:
 ```
 culturebank check

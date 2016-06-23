@@ -42,7 +42,8 @@ def main(args):
 
     load_families(
         data,
-        list(data['GrambankLanguage'].values()),
+        list(data['CulturebankLanguage'].values()),
+        glottolog=Glottolog(),
         isolates_icon='tcccccc')
 
     return 

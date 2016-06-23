@@ -20,7 +20,7 @@ from clld_glottologfamily_plugin.models import HasFamilyMixin, Family
 from .interfaces import IDependency, ITransition, IStability, IDeepFamily, ISupport, IHasSupport
 
 @implementer(interfaces.ILanguage)
-class GrambankLanguage(CustomModelMixin, Language, HasFamilyMixin):
+class CulturebankLanguage(CustomModelMixin, Language, HasFamilyMixin):
     pk = Column(Integer, ForeignKey('language.pk'), primary_key=True)
 
 
@@ -93,7 +93,7 @@ class Transition(Base, CustomModelMixin):
     retention_innovation = Column(String)
     
 @implementer(interfaces.IContribution)
-class GrambankContribution(CustomModelMixin, Contribution):
+class CulturebankContribution(CustomModelMixin, Contribution):
     pk = Column(Integer, ForeignKey('contribution.pk'), primary_key=True)
     desc = Column(String)
 
