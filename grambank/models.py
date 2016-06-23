@@ -26,7 +26,7 @@ class CulturebankLanguage(CustomModelMixin, Language, HasFamilyMixin):
 
 @implementer(interfaces.IParameter)
 class Feature(CustomModelMixin, Parameter, Versioned):
-    """Parameters in GramBank are called features. They are always related to one Designer.
+    """Parameters in CultureBank are called features. They are always related to one Designer.
     """
     pk = Column(Integer, ForeignKey('parameter.pk'), primary_key=True)
     doc = Column(String)

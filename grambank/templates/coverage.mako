@@ -13,13 +13,13 @@
         <tr>
             <th>Region</th>
             <th>Glottolog</th>
-            <th>GramBank</th>
+            <th>CultureBank</th>
             <th>Coverage</th>
             <th>Glottolog</th>
-            <th>GramBank</th>
+            <th>CultureBank</th>
             <th>Coverage</th>
             <th>Glottolog</th>
-            <th>GramBank</th>
+            <th>CultureBank</th>
             <th>Coverage</th>
         </tr>
     </thead>
@@ -59,14 +59,14 @@
         <th>Family</th>
         <th>Subunit</th>
         <th>Glottolog</th>
-        <th>GramBank</th>
+        <th>CultureBank</th>
         <th>Coverage</th>
         <th>Regions</th>
         <th>Glottolog</th>
-        <th>GramBank</th>
+        <th>CultureBank</th>
         <th>Coverage</th>
         <th>Glottolog</th>
-        <th>GramBank</th>
+        <th>CultureBank</th>
         <th>Coverage</th>
     </tr>
     </thead>

@@ -193,7 +193,7 @@ class FeatureSpec(object):
             raise
 
     def __init__(self, d):
-        self.id = d['GramBank ID'].strip()
+        self.id = d['CultureBank ID'].strip()
         self.name = d['Feature']
         self.doc = d['Clarifying Comments']
         self.patron = d['Feature patron']

@@ -244,8 +244,8 @@ class Families(Familys):
         return [
             LinkCol(self, 'name'),
             GlottologUrlCol(self, 'description', sTitle='Glottolog'),
-            FamilyMacroareaCol(self, 'region'),
-            LanguageCountCol(self, 'number of languages in GramBank'),
+            FamilyMacroareaCol(self, 'macroarea'),
+            LanguageCountCol(self, 'number of languages in CultureBank'),
         ]
 
 class CulturebankContributionsCol(Col):

@@ -8,7 +8,7 @@
 
 <p> Parsimony stability is calculated as follows. First we assuming
 the families and subclassifications (trees) of Glottolog. Data from
-GramBank is defined for leaves of these trees. All leaf nodes for we
+CultureBank is defined for leaves of these trees. All leaf nodes for we
 do not have data are ignored and all thusly superflous internal nodes
 are left out of consideration. Next, we reconstruct the values at each
 internal node such that the total number of changes is minimized (see,

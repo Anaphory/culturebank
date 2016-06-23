@@ -1,6 +1,7 @@
 <%inherit file="../home_comp.mako"/>
 <%namespace name="util" file="../util.mako"/>
 
+<<<<<<< aeb701f068041ea28d385d757cafa1adf2cf110c
 <h2>Welcome to GramSunDa</h2>
 
 <p class="lead">
@@ -14,6 +15,17 @@ GramSunDa is produced by a team directed by Marian Klamer, as part of a VICI pro
 
 <p>
 The original questionnaire was designed by Ger Reesink and
+=======
+<h2>Welcome to CultureBank</h2>
+
+<p class="lead">
+CultureBank is a database of structural (typological) features of language. It consists of 200 logically independent features (most of them binary) spanning all subdomains of morphosyntax. The CultureBank feature questionnaire has been filled in, based on reference grammars, for over 500 languages. The aim to eventually reach as many as 3,500 languages. The database can be used to investigate deep language prehistory, the geographical-distribution of features, language universals and the functional interaction of structural features.
+</p>
+
+<p>
+CultureBank produced by a team directed by Russell Gray and Quentin
+Atkinson. The original questionnaire was designed by Ger Reesink and
+>>>>>>> Rename this grambank fork to culturebank III
 Michael Dunn, subsequent extensions and clarifications were done by
 Hedvig Skirg&aring;rd, Suzanne van der Meer, Harald Hammarstr&ouml;m,
 Stephen Levinson, Hannah Haynie, Jeremy Collins, Nicholas Evans, and Hanna Fricke.</p>
@@ -37,22 +49,21 @@ Stephen Levinson, Hannah Haynie, Jeremy Collins, Nicholas Evans, and Hanna Frick
 </table>
 </p>
 
-<h3>How to use GramSunDa</h3>
+<h3>How to use CultureBank</h3>
 <p>
-Using GramSunDa requires a browser with Javascript enabled.
+Using CultureBank requires a browser with Javascript enabled.
 </p>
 <p>
-You find the features or languages of GramSunDa through the items "Features" and "Languages" in the navigation bar.
+You find the features or languages of CultureBank through the items "Features" and "Languages" in the navigation bar.
 </p>
 
 
 <p>
-GramSunDa is a publication of the
+CultureBank is a publication of the
 <a href="http://www.vici.marianklamer.org/">NWO Vici Grant Research Project (2014-2019) “Reconstructing the past through languages of the present: the Lesser Sunda Islands”</a> at the ${h.external_link('https://www.universiteitleiden.nl/en/humanities/leiden-university-centre-for-linguistics', label='Leiden University Centre for Linguistics')}.
 </p>
 
-
-<h3>How to cite GramSunDa Online</h3>
+<h3>How to cite CultureBank Online</h3>
 <p>
 </p>
 
