@@ -5,7 +5,7 @@
 
 
 <div class="span4 alert">
-    <img src="${request.static_url('grambank:static/dependencies.png')}">
+    <img src="${request.static_url('culturebank:static/dependencies.png')}">
     <div>
         <small>
             The Chu-Liu tree of binary feature dependencies in the GramBank data.

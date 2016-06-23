@@ -10,27 +10,27 @@ from clld_glottologfamily_plugin.models import Family
 from clld_glottologfamily_plugin.util import load_families
 from pyglottolog.api import Glottolog
 
-import grambank
-from grambank.scripts.util import (
-    import_features_collaborative_sheet, import_cldf, get_clf_paths, get_name,
+import culturebank
+from culturebank.scripts.util import (
+    import_features_collaborative_sheet, import_cldf, get_clf_paths, get_names,
     GRAMBANK_REPOS,
 )
 
 from stats_util import grp, feature_stability, feature_dependencies, dependencies_graph, deep_families, havdist
-from grambank.models import Dependency, Transition, Stability, DeepFamily, Support, HasSupport, Feature
+from culturebank.models import Dependency, Transition, Stability, DeepFamily, Support, HasSupport, Feature
 
 
 def main(args):
     data = Data()
     dataset = common.Dataset(
-        id=grambank.__name__,
-        name="GramSunDa",
-        publisher_name="Leiden University Centre for Linguistics",
-        publisher_place="Leiden",
-        publisher_url="https://www.universiteitleiden.nl/en/humanities/leiden-university-centre-for-linguistics",
-        license="NONE", #"http://creativecommons.org/licenses/by/4.0/",
-        domain='gramsunda.marianklamer.org',
-        contact='g.a.kaiping@hum.leidenuniv.nl',
+        id=culturebank.__name__,
+        name="GramBank",
+        publisher_name="Max Planck Institute for the Science of Human History",
+        publisher_place="Jena",
+        publisher_url="http://shh.mpg.de",
+        license="http://creativecommons.org/licenses/by/4.0/",
+        domain='culturebank.clld.org',
+        contact='harald.hammarstrom@gmail.com',
         jsondata={
             'license_icon': 'cc-by.png',
             'license_name': 'No license yet'}) # Creative Commons Attribution 4.0 International License'})

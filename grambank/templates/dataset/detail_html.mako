@@ -37,7 +37,6 @@ Stephen Levinson, Hannah Haynie, Jeremy Collins, Nicholas Evans, and Hanna Frick
 </table>
 </p>
 
-
 <h3>How to use GramSunDa</h3>
 <p>
 Using GramSunDa requires a browser with Javascript enabled.

@@ -19,7 +19,7 @@ from .models import Dependency, Transition
 from clld.web.icon import SHAPES
 from clld.interfaces import IIcon
 
-from grambank.maps import DeepFamilyMap
+from culturebank.maps import DeepFamilyMap
 
 COLORS = [
     #            red     yellow
@@ -29,16 +29,16 @@ COLORS = [
 
 
 
-def td_coverage(glottolog=0, grambank=0, label=None):
+def td_coverage(glottolog=0, culturebank=0, label=None):
     style = ''
     if glottolog == 0:
         style = 'background-color: hsl(120,100%,50%)'
-        if grambank == 0:
+        if culturebank == 0:
             percentage = 0
         else:
             percentage = 1
     else:
-        percentage = grambank / glottolog
+        percentage = culturebank / glottolog
     return HTML.td(
         label if label else '\xa0%s%%\xa0' % int(round(percentage * 100)),
         class_='left' if label else 'center',

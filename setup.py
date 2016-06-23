@@ -14,9 +14,9 @@ tests_require = [
 ]
 
 
-setup(name='grambank',
+setup(name='culturebank',
       version='0.0',
-      description='grambank',
+      description='culturebank',
       long_description='',
       classifiers=[
         "Programming Language :: Python",
@@ -33,9 +33,9 @@ setup(name='grambank',
       zip_safe=False,
       install_requires=requires,
       tests_require=tests_require,
-      test_suite="grambank",
+      test_suite="culturebank",
       entry_points="""\
 [paste.app_factory]
-main = grambank:main
+main = culturebank:main
 """,
       )

@@ -1,16 +1,16 @@
 
-Releasing grambank
+Releasing culturebank
 ==================
 
 - Update the glottobank/Grambank repository
 - Run the checks on the data repos:
 ```
-grambank check
+culturebank check
 ```
 - Recreate the database
 - Recompute coverage information running
 ```
-cd grambank/coverage
+cd culturebank/coverage
 ./coverage.sh
 ```
 - Run the tests

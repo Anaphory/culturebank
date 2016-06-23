@@ -26,11 +26,11 @@ from clld.scripts.util import bibtex2source
 
 from clldclient.glottolog import Glottolog as LocalGlottolog
 
-import grambank
-from grambank.models import GrambankLanguage, Feature, GrambankContribution
+import culturebank
+from culturebank.models import GrambankLanguage, Feature, GrambankContribution
 
 
-GRAMBANK_REPOS = "j:/ResearchData/HUM/LUCL-KlamerVICI/sunda_database/grambank/"
+GRAMBANK_REPOS = "j:/ResearchData/HUM/LUCL-KlamerVICI/sunda_database/culturerumah-data/"
 
 def import_dataset(path, data, icons, add_missing_features = False):
     # look for metadata

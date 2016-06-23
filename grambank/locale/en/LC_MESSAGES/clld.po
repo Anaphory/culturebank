@@ -1,11 +1,11 @@
-# English translations for grambank.
+# English translations for culturebank.
 # Copyright (C) 2015 ORGANIZATION
-# This file is distributed under the same license as the grambank project.
+# This file is distributed under the same license as the culturebank project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: grambank 0.0\n"
+"Project-Id-Version: culturebank 0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2016-01-06 20:04+0100\n"
 "PO-Revision-Date: 2016-01-06 20:03+0100\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.1.1\n"
 
-#: grambank/__init__.py:17
+#: culturebank/__init__.py:17
 msgid "Parameters"
 msgstr "Features"
 
-#: grambank/__init__.py:18
+#: culturebank/__init__.py:18
 msgid "Parameter"
 msgstr "Feature"
 
-#: grambank/__init__.py:19
+#: culturebank/__init__.py:19
 msgid "Familys"
 msgstr "Families"
 
-#: grambank/__init__.py:20
+#: culturebank/__init__.py:20
 msgid "Dependencys"
 msgstr "Dependencies"
 
-#: grambank/__init__.py:21
+#: culturebank/__init__.py:21
 msgid "Stabilitys"
 msgstr "Stabilities"
 
-#: grambank/__init__.py:22
+#: culturebank/__init__.py:22
 msgid "Deepfamilys"
 msgstr "Deep-Family Suggestions"
 

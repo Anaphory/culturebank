@@ -3,7 +3,7 @@ import math
 
 from clldutils.path import Path
 
-import grambank
+import culturebank
 
 
 uchar = '?'
@@ -480,8 +480,8 @@ def dependencies_graph(imps):
         if sum(H.values()) > mv:
             (mv, H) = (sum(H.values()), H)
     #W = dict([(y, 1.0-v) for ((x, y), v) in H.iteritems()])
-    #sav(dot(H, V), 'grambank_mst.gv')
-    path = Path(grambank.__file__).parent.joinpath('static', 'dependencies.gv')
+    #sav(dot(H, V), 'culturebank_mst.gv')
+    path = Path(culturebank.__file__).parent.joinpath('static', 'dependencies.gv')
     with open(path.as_posix(), 'w') as fp:
         fp.write(dot(H, V))
 

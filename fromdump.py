@@ -5,7 +5,7 @@ from shutil import copytree
 
 if __name__ == '__main__':
     src = os.path.dirname(os.path.abspath(__file__))
-    dest = os.path.join(os.path.split(src)[0], 'grambank')
+    dest = os.path.join(os.path.split(src)[0], 'culturebank')
     if src != dest:
         copytree(src, dest)
     os.chdir(dest)
@@ -13,13 +13,13 @@ if __name__ == '__main__':
 #---------------------------------------------------------#
 
 Run
-    cd grambank
+    cd culturebank
     pip install -r requirements.txt
     python setup.py develop
-    python grambank/scripts/unfreeze.py sqlite.ini
+    python culturebank/scripts/unfreeze.py sqlite.ini
     pserve sqlite.ini
 
-or equivalent to start the grambank web app accessible at
+or equivalent to start the culturebank web app accessible at
 
     http://localhost:6543
 

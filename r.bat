@@ -1,7 +1,7 @@
 SET PGPASSWORD=blodig1kuk
-dropdb -U postgres grambank
-createdb -U postgres grambank
+dropdb -U postgres culturebank
+createdb -U postgres culturebank
 REM psql -U postgres -f pldb.sql linc
-..\python grambank/scripts/initializedb.py development.ini --module grambank
+..\python culturebank/scripts/initializedb.py development.ini --module culturebank
 REM > ntserr.log
 pserve --reload development.ini

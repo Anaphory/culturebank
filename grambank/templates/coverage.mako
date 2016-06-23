@@ -30,13 +30,13 @@
                     <button type="button" class="ma btn" id="${ma}">${macroareas[ma]}</button>
             </td>
             <td class="right">${data['total']['glottolog']}</td>
-            <td class="right">${data['total']['grambank']}</td>
+            <td class="right">${data['total']['culturebank']}</td>
             ${u.td_coverage(**data['total'])|n}
             <td class="right">${data['grammar']['glottolog']}</td>
-            <td class="right">${data['grammar']['grambank']}</td>
+            <td class="right">${data['grammar']['culturebank']}</td>
             ${u.td_coverage(**data['grammar'])|n}
             <td class="right">${data['grammarsketch']['glottolog']}</td>
-            <td class="right">${data['grammarsketch']['grambank']}</td>
+            <td class="right">${data['grammarsketch']['culturebank']}</td>
             ${u.td_coverage(**data['grammarsketch'])|n}
         </tr>
         % endfor
@@ -82,14 +82,14 @@
                     % endif
                 </td>
                 <td class="right">${data['total']['glottolog']}</td>
-                <td class="right">${data['total']['grambank']}</td>
+                <td class="right">${data['total']['culturebank']}</td>
                 ${u.td_coverage(**data['total'])|n}
                 <td>${', '.join([ma[0] for ma in data['macroareas']])}</td>
                 <td class="right">${data['grammar']['glottolog']}</td>
-                <td class="right">${data['grammar']['grambank']}</td>
+                <td class="right">${data['grammar']['culturebank']}</td>
                 ${u.td_coverage(**data['grammar'])|n}
                 <td class="right">${data['grammarsketch']['glottolog']}</td>
-                <td class="right">${data['grammarsketch']['grambank']}</td>
+                <td class="right">${data['grammarsketch']['culturebank']}</td>
                 ${u.td_coverage(**data['grammarsketch'])|n}
             </tr>
             % for (sfid, fname), data in data.get('subgroups', {}).items():
@@ -97,14 +97,14 @@
                     <td></td>
                     ${u.td_coverage(label=fname, **data['total'])|n}
                     <td class="right">${data['total']['glottolog']}</td>
-                    <td class="right">${data['total']['grambank']}</td>
+                    <td class="right">${data['total']['culturebank']}</td>
                     ${u.td_coverage(**data['total'])|n}
                     <td>${', '.join([ma[0] for ma in data['macroareas']])}</td>
                     <td class="right">${data['grammar']['glottolog']}</td>
-                    <td class="right">${data['grammar']['grambank']}</td>
+                    <td class="right">${data['grammar']['culturebank']}</td>
                     ${u.td_coverage(**data['grammar'])|n}
                     <td class="right">${data['grammarsketch']['glottolog']}</td>
-                    <td class="right">${data['grammarsketch']['grambank']}</td>
+                    <td class="right">${data['grammarsketch']['culturebank']}</td>
                     ${u.td_coverage(**data['grammarsketch'])|n}
                 </tr>
             % endfor

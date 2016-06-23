@@ -4,11 +4,11 @@ from clld.interfaces import IValue, IDomainElement, IMapMarker, IValueSet, ILink
 from clld_glottologfamily_plugin.util import LanguageByFamilyMapMarker
 
 # we must make sure custom models are known at database initialization!
-from grambank import models
-from grambank import views
-from grambank.interfaces import IDependency, ITransition, IStability, IDeepFamily, ISupport
-from grambank.models import Dependency, Transition, Stability, DeepFamily, Support
-from grambank.datatables import Families
+from culturebank import models
+from culturebank import views
+from culturebank.interfaces import IDependency, ITransition, IStability, IDeepFamily, ISupport
+from culturebank.models import Dependency, Transition, Stability, DeepFamily, Support
+from culturebank.datatables import Families
 
 
 _ = lambda s: s
