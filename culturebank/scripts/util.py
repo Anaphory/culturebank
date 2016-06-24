@@ -13,7 +13,6 @@ from clldutils.jsonlib import load as jsonload
 from clldutils.misc import slug
 from clldutils.dsv import reader
 from clldutils.path import Path
-from pyglottolog.api import Glottolog
 
 from clld.db.meta import DBSession
 from clld.db.models.common import (
@@ -24,7 +23,7 @@ from clld.lib.bibtex import Database
 from clld.web.icon import ORDERED_ICONS
 from clld.scripts.util import bibtex2source
 
-from clldclient.glottolog import Glottolog as LocalGlottolog
+from clldclient.glottolog import Glottolog
 
 import culturebank
 from culturebank.models import CulturebankLanguage, Feature, CulturebankContribution
@@ -39,7 +38,7 @@ def import_dataset(path, data, icons, add_missing_features = False):
     
     dirpath, fname = os.path.split(path)
     basename, ext = os.path.splitext(fname)
-    glottolog = LocalGlottolog()
+    glottolog = Glottolog()
 
     try:
         contrib = CulturebankContribution(id=basename, name=basename, desc=glottolog.languoid(basename).name)
@@ -235,9 +234,13 @@ def import_features_collaborative_sheet(datadir, data):
 
 def get_clf_paths(lgs):
     glottolog = Glottolog()
-    return [
-        tuple([ll.id for ll in l.ancestors] + [l.id]) for l in glottolog.languoids(lgs)]
+    for lg in lgs:
+        l = glottolog.languoid(lg)
+        ancestors = [l.id]
+        while l.parent:
+            ancestors.insert(0, l.parent.id)
+            l = l.parent
+        yield tuple(ancestors)
 
-
-def get_name():
-    return {l.id: l.name for l in Glottolog().languoids()}
+def get_name(l_id):
+    return Glottolog().languoid(l_id).name

@@ -18,27 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.1.1\n"
 
-#: culturebank/__init__.py:17
+#: culturebank/__init__.py:15
 msgid "Parameters"
 msgstr "Features"
 
-#: culturebank/__init__.py:18
+#: culturebank/__init__.py:16
 msgid "Parameter"
 msgstr "Feature"
 
-#: culturebank/__init__.py:19
+#: culturebank/__init__.py:17
 msgid "Familys"
 msgstr "Families"
 
-#: culturebank/__init__.py:20
+#: culturebank/__init__.py:18
 msgid "Dependencys"
 msgstr "Dependencies"
 
-#: culturebank/__init__.py:21
+#: culturebank/__init__.py:19
 msgid "Stabilitys"
 msgstr "Stabilities"
 
-#: culturebank/__init__.py:22
+#: culturebank/__init__.py:20
 msgid "Deepfamilys"
 msgstr "Deep-Family Suggestions"
 
