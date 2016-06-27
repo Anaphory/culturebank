@@ -12,7 +12,7 @@ from pyglottolog.api import Glottolog
 
 import culturebank
 from culturebank.scripts.util import (
-    import_features_collaborative_sheet, import_cldf, get_clf_paths, get_names,
+    import_features_collaborative_sheet, import_cldf, get_clf_paths, get_name,
     CULTUREBANK_REPOS,
 )
 
@@ -43,7 +43,6 @@ def main(args):
     load_families(
         data,
         list(data['CulturebankLanguage'].values()),
-        glottolog=Glottolog(),
         isolates_icon='tcccccc')
 
     return 
