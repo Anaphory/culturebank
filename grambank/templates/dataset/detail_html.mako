@@ -1,18 +1,22 @@
 <%inherit file="../home_comp.mako"/>
 <%namespace name="util" file="../util.mako"/>
 
-<h2>Welcome to GramBank</h2>
+<h2>Welcome to GramSunDa</h2>
 
 <p class="lead">
-GramBank is a database of structural (typological) features of language. It consists of 200 logically independent features (most of them binary) spanning all subdomains of morphosyntax. The GramBank feature questionnaire has been filled in, based on reference grammars, for over 500 languages. The aim to eventually reach as many as 3,500 languages. The database can be used to investigate deep language prehistory, the geographical-distribution of features, language universals and the functional interaction of structural features.
+GramSunDa is a database of structural (typological) features of languages of the Lesser Sunda Islands.
+It consists of more than 200 logically independent features (most of them binary) spanning all subdomains of morphosyntax.
+The GramSunDa feature questionnaire has been expanded from <a href="http://glottobank.org/?grambank">GramBank</a> an been filled in, based on reference grammars and active field work, for about 20 languages and varieties in the region.
 </p>
 
 <p>
-GramBank produced by a team directed by Russell Gray and Quentin
-Atkinson. The original questionnaire was designed by Ger Reesink and
+GramSunDa is produced by a team directed by Marian Klamer, as part of a VICI project at Leiden University Centre for Linguistics.</p>
+
+<p>
+The original questionnaire was designed by Ger Reesink and
 Michael Dunn, subsequent extensions and clarifications were done by
 Hedvig Skirg&aring;rd, Suzanne van der Meer, Harald Hammarstr&ouml;m,
-Stephen Levinson, Hannah Haynie, Jeremy Collins and Nicholas Evans.</p>
+Stephen Levinson, Hannah Haynie, Jeremy Collins, Nicholas Evans, and Hanna Fricke.</p>
 
 <p>
 <table class="table table-condensed table-nonfluid">
@@ -33,82 +37,30 @@ Stephen Levinson, Hannah Haynie, Jeremy Collins and Nicholas Evans.</p>
 </table>
 </p>
 
-<h3>For Coders</h3>
+
+<h3>How to use GramSunDa</h3>
 <p>
-<ulist>
-<ul>Example sheets:
-<ulist>
-<ul>Empty GB coder sheet, i.e., the most recent version of GramBank sheet with feature categories and standardised comments:
-<a href="https://github.com/glottobank/Grambank/blob/master/For_coders/GramBank_most_updated_sheet.xlsx">.xlsx</a> (requires github login). Note: select the "Empty Sheet" from the workbook.
-</ul>
-<ul>Example filled-in sheet (by Harald on a slightly earlier version of GramBank)
-<a href="http://haraldhammarstrom.ruhosting.nl/Harald Hammarstrom_Nyam [nmi].tsv">.tsv</a>
-</ul>
-
-</ulist>
-</ul>
-
-<ul><a href="http://haraldhammarstrom.ruhosting.nl/grambankcoding.pdf">GramBank coding manual</a> (presentation)</ul>
-
-
-<ul>The mailing list for all kinds of questions is <a href="https://groups.google.com/forum/#!forum/grambank-and-nts-coders-discussion">GramBank-and-NTS-coders-discussion@googlegroups.com</a>. Note:
-
-<ulist>
-<ul> There are (almost) no stupid questions</ul>
-<ul> Provide context to your issue (minimally provide the feature number and question in full and your language-specific situation)</ul>
-<ul> One email thread per issue</ul>
-<ul> If the issue is not solved in the mailing list, it will be discussed at the next meeting. Remember, one solution can also be "it is not clear what to do, code it with "?"</ul>
-</ulist>
-</ul>
-
-
-<ul><a href="https://github.com/glottobank/Grambank/wiki/List-of-all-features">List</a> of all Wiki articles</ul>
-
-<ul><a href="https://github.com/glottobank/Grambank/wiki/Template-for-feature-description">Template</a> for feature description</ul>
-
-<ul><a href="https://docs.google.com/document/d/1L5W61zI1_xSTzHC8okqc-0g0o27dGbl6hnEoBJczqqY/edit?usp=sharing">Procedures and examples</a>by Jeremy Collins</ul>
-
-<ul><a href="https://drive.google.com/folderview?id=0B-lVFHmduY1Wb3FURnhTVkJvakE&usp=sharing&tid=0B-lVFHmduY1WQ1UxZXhmZWo5SUU">Meeting notes</a></ul>
-
-<ul><a href="https://docs.google.com/document/d/125fBEZ80CY-9DYEipAwcPOHEdlZpJDzaFfrzef_kOVc/edit">Agenda for next meeting</a> (fill in your issues!)</ul>
-
-<ul><a href="https://docs.google.com/document/d/1YAPZGtpBrMzfNdAoSsplM71CudRudIq9AePQ8Cz8ksQ/edit?usp=sharing">General notes on coding</a></ul>
-
-<ul><a href="https://docs.google.com/document/d/1V5rVmCisUa1dP1zz-UdrmDfuA9JseC7KlUHLQWFDv5o/edit?usp=sharing">History of the questionnaire</a></ul>
-
-<ul><a href="http://haraldhammarstrom.ruhosting.nl/grambank_goals.txt">GramBank Statement of Goals</a></ul>
-
-<ul><a href="https://docs.google.com/spreadsheets/d/1xS6r8G2gdveEBB1kIHdR3eF1A_G-U7fe30hK0tJ2SC8/edit#gid=1504847426">NTS-Collaborative feature sheet</a> a large excel document with correspondences between GramBank and other databases (SAILS, WALS, NTS, etc), deprecated features as well as a lot of features metadata.</ul>
-</ulist>
-
-</p>
-
-
-
-<h3>How to use GramBank</h3>
-<p>
-Using GramBank requires a browser with Javascript enabled.
+Using GramSunDa requires a browser with Javascript enabled.
 </p>
 <p>
-You find the features or languages of GramBank through the items "Features" and "Languages" in the navigation bar.
+You find the features or languages of GramSunDa through the items "Features" and "Languages" in the navigation bar.
 </p>
 
 
 <p>
-GramBank is a publication of the
-${h.external_link('http://http://www.shh.mpg.de', label='Linguistic and Cultural Evolution Group')} at the Max Planck Institute for the Science of Human History, Jena.
+GramSunDa is a publication of the
+<a href="http://www.vici.marianklamer.org/">NWO Vici Grant Research Project (2014-2019) “Reconstructing the past through languages of the present: the Lesser Sunda Islands”</a> at the ${h.external_link('https://www.universiteitleiden.nl/en/humanities/leiden-university-centre-for-linguistics', label='Leiden University Centre for Linguistics')}.
 </p>
 
 
-<h3>How to cite GramBank Online</h3>
+<h3>How to cite GramSunDa Online</h3>
 <p>
-TODO
-Harald Hammarstr\"om, Hedvig Skirg&aring;rd, Jeremy Collins, Hannah Haynie, Michael Dunn, Stephen Levinson, Quentin Atkinson and Russell Gray 2016. Grambank: A world-wide Typological Database. Electronic Database under Development.
+
 </p>
 
 <h3>Terms of use</h3>
 <p>
-The content of this web site is published under a Creative Commons Licence.
+The content of this web site is published.
 We invite the community of users to think about further applications for the available data
 and look forward to your comments, feedback and questions.
 </p>
