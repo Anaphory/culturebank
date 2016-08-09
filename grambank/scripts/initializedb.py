@@ -12,7 +12,7 @@ from pyglottolog.api import Glottolog
 
 import grambank
 from grambank.scripts.util import (
-    import_features_collaborative_sheet, import_cldf, get_clf_paths, get_names,
+    import_features_collaborative_sheet, import_cldf, get_clf_paths, get_name,
     GRAMBANK_REPOS,
 )
 
@@ -24,25 +24,25 @@ def main(args):
     data = Data()
     dataset = common.Dataset(
         id=grambank.__name__,
-        name="GramBank",
-        publisher_name="Max Planck Institute for the Science of Human History",
-        publisher_place="Jena",
-        publisher_url="http://shh.mpg.de",
-        license="http://creativecommons.org/licenses/by/4.0/",
-        domain='grambank.clld.org',
-        contact='harald.hammarstrom@gmail.com',
+        name="GramSunDa",
+        publisher_name="Leiden University Centre for Linguistics",
+        publisher_place="Leiden",
+        publisher_url="https://www.universiteitleiden.nl/en/humanities/leiden-university-centre-for-linguistics",
+        license="NONE", #"http://creativecommons.org/licenses/by/4.0/",
+        domain='gramsunda.marianklamer.org',
+        contact='g.a.kaiping@hum.leidenuniv.nl',
         jsondata={
             'license_icon': 'cc-by.png',
-            'license_name': 'Creative Commons Attribution 4.0 International License'})
+            'license_name': 'No license yet'}) # Creative Commons Attribution 4.0 International License'})
     DBSession.add(dataset)
 
     import_features_collaborative_sheet(GRAMBANK_REPOS, data)
     import_cldf(os.path.join(GRAMBANK_REPOS, 'datasets'), data)
     ##import_cldf("C:\\python27\\dbs\\bwohh\\", data, add_missing_features = True)
+
     load_families(
         data,
         list(data['GrambankLanguage'].values()),
-        glottolog=Glottolog(),
         isolates_icon='tcccccc')
 
     return 
@@ -52,6 +52,8 @@ def prime_cache(args):
     This procedure should be separate from the db initialization, because
     it will have to be run periodically whenever data has been updated.
     """
+    compute_language_sources()
+    return 
     from time import time
     _s = time()
 
@@ -61,16 +63,16 @@ def prime_cache(args):
         return n
 
     sql = """
-select l.id, p.id, v.name from value as v, valueset as vs, language as l, parameter as p
+select p.id, l.id, v.name from value as v, valueset as vs, language as l, parameter as p
 where v.valueset_pk = vs.pk and vs.language_pk = l.pk and vs.parameter_pk = p.pk
     """
     datatriples = [(v[0], v[1], v[2]) for v in DBSession.execute(sql)]
     _s = checkpoint(_s, '%s values loaded' % len(datatriples))
 
-    flv = dict([(feature, dict(lvs)) for (feature, lvs) in grp([(f, l, v) for (l, f, v) in datatriples]).items()])
+    flv = dict([(feature, dict(lvs)) for (feature, lvs) in grp(datatriples).items()])
     _s = checkpoint(_s, 'triples grouped')
 
-    clfps = get_clf_paths([row[0] for row in DBSession.execute("select id from language")])
+    clfps = list(get_clf_paths([row[0] for row in DBSession.execute("select id from language")]))
     _s = checkpoint(_s, '%s clfps loaded' % len(clfps))
 
     features = {f.id: f for f in DBSession.query(Feature)}
@@ -79,13 +81,13 @@ where v.valueset_pk = vs.pk and vs.language_pk = l.pk and vs.parameter_pk = p.pk
     DBSession.flush()
     _s = checkpoint(_s, 'representation assigned')
 
-    glottolog_names = get_names()
     families = {f.id: f for f in DBSession.query(Family)}
-    try:
+    if False:
         fs = feature_stability(datatriples, clfps)
         _s = checkpoint(_s, 'feature_stability computed')
 
         for (f, (s, transitions, stationarity_p, synchronic_p)) in fs:
+            print(f)
             stability = Stability(
                 id=f.replace("GB", "S"),
                 feature=features[f],
@@ -98,20 +100,18 @@ where v.valueset_pk = vs.pk and vs.language_pk = l.pk and vs.parameter_pk = p.pk
                 DBSession.add(Transition(
                     id="%s: %s->%s" % (f, fromnode, tonode),
                     stability=stability,
-                    fromnode=glottolog_names[fromnode],
-                    tonode=glottolog_names[tonode],
+                    fromnode=get_name(fromnode),
+                    tonode=get_name(tonode),
                     fromvalue=ft,
                     tovalue=tt,
                     family=families[fam],
                     retention_innovation="Retention" if ft == tt else "Innovation"))
-    except IndexError:
-        pass
-    DBSession.flush()
-    _s = checkpoint(_s, 'stability and transitions loaded')
+        DBSession.flush()
+        _s = checkpoint(_s, 'stability and transitions loaded')
 
     imps = feature_dependencies(datatriples)
     _s = checkpoint(_s, 'feature_dependencies computed')
-    try:
+    if True:
         (H, V) = dependencies_graph([(v, f1, f2) for ((v, dstats), f1, f2) in imps])
         _s = checkpoint(_s, 'dependencies_graph written')
 
@@ -127,8 +127,6 @@ where v.valueset_pk = vs.pk and vs.language_pk = l.pk and vs.parameter_pk = p.pk
                 jsondata=dstats))
         DBSession.flush()
         _s = checkpoint(_s, 'dependencies loaded')
-    except TypeError:
-        pass
 
     coordinates = {
         lg.id: (lg.longitude, lg.latitude)
@@ -191,3 +189,4 @@ where v.valueset_pk = vs.pk and vs.language_pk = l.pk and vs.parameter_pk = p.pk
 if __name__ == '__main__':
     initializedb(create=main, prime_cache=prime_cache)
     sys.exit(0)
+

@@ -199,6 +199,8 @@ def mrow_diff(r1vs, r2vs):
     return sum([(r1vs.get(x, 0.0)-r2vs.get(x, 0.0))**2 for x in u])
     
 def stationary(m, epsilon = 0.0001):
+    if not m:
+        return []
     def stationary_diff(mtx):
         return sum([mrow_diff(mtx[r1], mtx[r2]) for (r1, r2) in pairs(iter(mtx.keys()))])
         
@@ -216,7 +218,7 @@ def synchronic(lv, d):
     
 def feature_stability(datatriples, clfps):
     clf = paths_to_d(clfps)
-    flv = dict([(feature, dict(lvs)) for (feature, lvs) in grp([(f, l, v) for (l, f, v) in datatriples if v not in undefined]).items()])
+    flv = dict([(feature, dict(lvs)) for (feature, lvs) in grp(datatriples).items()])
     return [(f, parsimony_stability(lv, clf)) for (f, lv) in flv.items()]
 
 def parsimony_stability(lv, fp):
@@ -464,7 +466,7 @@ def both_defined(lv1, lv2):
     return (dict([(x, lv1[x]) for x in u]), dict([(x, lv2[x]) for x in u])) 
 
 def feature_dependencies(datatriples):
-    flv = dict([(feature, dict(lvs)) for (feature, lvs) in grp([(f, l, v) for (l, f, v) in datatriples]).items()])
+    flv = dict([(feature, dict(lvs)) for (feature, lvs) in grp(datatriples).items()])
     imps = [(implies(both_defined(lv1, lv2)), f1, f2) for (f1, lv1) in flv.items() for (f2, lv2) in flv.items() if f1 != f2]
     return imps
 
@@ -473,7 +475,10 @@ def dependencies_graph(imps):
     V = set([f for fs in deps.keys() for f in fs])
     G = dict([(k, v) for (k, v) in list(deps.items()) if v > 0.0])
     MSTs = [mst(G, x) for x in V]
-    (mv, H) = max([(sum(H.values()), H) for H in MSTs])
+    (mv, H) = (float("-inf"), None)
+    for H in MSTs:
+        if sum(H.values()) > mv:
+            (mv, H) = (sum(H.values()), H)
     #W = dict([(y, 1.0-v) for ((x, y), v) in H.iteritems()])
     #sav(dot(H, V), 'grambank_mst.gv')
     path = Path(grambank.__file__).parent.joinpath('static', 'dependencies.gv')
@@ -501,8 +506,8 @@ def deep_families(datatriples, clfps, coordinates = {}):
     fstab = {f: s["stability"] for (f, (s, transitions, stationarity_p, synchronic_p)) in fstability}
     fsynp = {f: synchronic_p for (f, (s, transitions, stationarity_p, synchronic_p)) in fstability}
     
-    flv = dict([(feature, dict(lvs)) for (feature, lvs) in grp([(f, l, v) for (l, f, v) in datatriples if v not in undefined]).items()])
-    lfv = dict([(l, dict(fs)) for (l, fs) in grp([(l, f, v) for (l, f, v) in datatriples if v not in undefined]).items()])
+    flv = dict([(feature, dict(lvs)) for (feature, lvs) in grp([(f, l, v) for (f, l, v) in datatriples if v not in undefined]).items()])
+    lfv = dict([(l, dict(fs)) for (l, fs) in grp([(l, f, v) for (f, l, v) in datatriples if v not in undefined]).items()])
 
     clf = paths_to_d(clfps)
     clfc = {pth[-1]: pth[:-1] for pth in clfps}

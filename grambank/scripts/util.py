@@ -4,6 +4,7 @@ import re
 from collections import OrderedDict
 from itertools import cycle
 import csv
+import pandas
 import getpass
 
 from nameparser import HumanName
@@ -29,7 +30,7 @@ import grambank
 from grambank.models import GrambankLanguage, Feature, GrambankContribution
 
 
-GRAMBANK_REPOS = "p:/My Documents/Database/data/sunda/grambank/"
+GRAMBANK_REPOS = "j:/ResearchData/HUM/LUCL-KlamerVICI/sunda_database/grambank/"
 
 def import_dataset(path, data, icons, add_missing_features = False):
     # look for metadata
@@ -69,7 +70,10 @@ def import_dataset(path, data, icons, add_missing_features = False):
 
     languages = {f['properties']['glottocode']: f for f in md.get('features', [])}
 
-    for i, row in enumerate(reader(path, dicts=True, quoting=csv.QUOTE_NONE, delimiter=',' if 'c' in ext else '\t')):
+    for i, row in pandas.io.parsers.read_csv(
+            path,
+            sep=',' if 'c' in ext else '\t',
+            encoding='utf-16').iterrows():
         if not row['Value'] or not row['Feature_ID']:
             continue
         vsid = '%s-%s-%s' % (basename, row['Language_ID'], row['Feature_ID'])
@@ -204,7 +208,9 @@ class FeatureSpec(object):
 
 
 def import_features_collaborative_sheet(datadir, data):
-    for feature in reader(os.path.join(datadir, 'features_collaborative_sheet.tsv'), delimiter='\t', dicts=True):
+    for i, feature in pandas.io.parsers.read_csv(
+            os.path.join(datadir, 'features_collaborative_sheet.tsv'),
+            sep='\t', encoding='utf-16').iterrows():
         feature = FeatureSpec(feature)
         f = data.add(Feature, feature.id, id=feature.id, name=feature.name, doc=feature.doc, patron=feature.patron, std_comments=feature.std_comments, name_french=feature.name_french, jl_relevant_unit=feature.jl_relevant_unit, jl_function=feature.jl_function, jl_formal_means=feature.jl_formal_means, hard_to_deny=feature.hard_to_deny, prone_misunderstanding=feature.prone_misunderstanding, requires_extensive_data=feature.requires_extensive_data, last_edited=feature.last_edited, other_survey=feature.other_survey)
         for i, (deid, desc) in enumerate(feature.domain.items()):
@@ -224,5 +230,5 @@ def get_clf_paths(lgs):
         tuple([ll.id for ll in l.ancestors] + [l.id]) for l in glottolog.languoids(lgs)]
 
 
-def get_names():
+def get_name():
     return {l.id: l.name for l in Glottolog().languoids()}
