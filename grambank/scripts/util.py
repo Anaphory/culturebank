@@ -74,7 +74,8 @@ def import_dataset(path, data, icons, add_missing_features = False):
             path,
             sep=',' if 'c' in ext else '\t',
             encoding='utf-16').iterrows():
-        if not row['Value'] or not row['Feature_ID']:
+        if pandas.isnull(row['Value']) or pandas.isnull(row['Feature_ID']):
+            print("Expected columns not found: ", row)
             continue
         vsid = '%s-%s-%s' % (basename, row['Language_ID'], row['Feature_ID'])
         vid = row.get('ID', '%s-%s' % (basename, i + 1))
@@ -114,10 +115,6 @@ def import_dataset(path, data, icons, add_missing_features = False):
                 latitude=gl_md.get('latitude'),
                 longitude=gl_md.get('longitude'))
 
-        domain = {de.abbr: de for de in parameter.domain}    
-        if not domain.get(row['Value']):
-            #print "skipped", row, "not in", domain
-            continue
         
         vs = data['ValueSet'].get(vsid)
         if vs is None:
@@ -129,9 +126,20 @@ def import_dataset(path, data, icons, add_missing_features = False):
                 contribution=contrib,
                 source=row['Source'])
 
+        domain = {de.abbr: de for de in parameter.domain}    
         name = row['Value']
         if name in domain:
             name = domain[name].name
+        else:
+            name = str(name)
+            if name in domain:
+                name = domain[name].name
+            else:
+                raise ValueError("For feature {:s} in language {:s}: Name {:s} not found among domain values {:}".format(
+                    row['Language_ID'],
+                    row['Feature_ID'],
+                    name,
+                    {d: de for d, de in domain.items()}))
 
         data.add(Value,
             vid,
@@ -141,6 +149,7 @@ def import_dataset(path, data, icons, add_missing_features = False):
             description=row['Comment'],
             domainelement=domain.get(row['Value']))
 
+        print(".", end="")
         if vs.source is not None:
             for key, src in list(data['Source'].items()):
                 if key in vs.source:
