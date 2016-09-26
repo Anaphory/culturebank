@@ -1,34 +1,11 @@
 <%inherit file="../home_comp.mako"/>
 <%namespace name="util" file="../util.mako"/>
 
-<<<<<<< aeb701f068041ea28d385d757cafa1adf2cf110c
-<h2>Welcome to GramSunDa</h2>
-
-<p class="lead">
-GramSunDa is a database of structural (typological) features of languages of the Lesser Sunda Islands.
-It consists of more than 200 logically independent features (most of them binary) spanning all subdomains of morphosyntax.
-The GramSunDa feature questionnaire has been expanded from <a href="http://glottobank.org/?grambank">GramBank</a> an been filled in, based on reference grammars and active field work, for about 20 languages and varieties in the region.
-</p>
-
-<p>
-GramSunDa is produced by a team directed by Marian Klamer, as part of a VICI project at Leiden University Centre for Linguistics.</p>
-
-<p>
-The original questionnaire was designed by Ger Reesink and
-=======
 <h2>Welcome to CultureBank</h2>
 
 <p class="lead">
-CultureBank is a database of structural (typological) features of language. It consists of 200 logically independent features (most of them binary) spanning all subdomains of morphosyntax. The CultureBank feature questionnaire has been filled in, based on reference grammars, for over 500 languages. The aim to eventually reach as many as 3,500 languages. The database can be used to investigate deep language prehistory, the geographical-distribution of features, language universals and the functional interaction of structural features.
+CultureBank is a database of typological features of cultures of the Lesser Sunda Islands.
 </p>
-
-<p>
-CultureBank produced by a team directed by Russell Gray and Quentin
-Atkinson. The original questionnaire was designed by Ger Reesink and
->>>>>>> Rename this grambank fork to culturebank III
-Michael Dunn, subsequent extensions and clarifications were done by
-Hedvig Skirg&aring;rd, Suzanne van der Meer, Harald Hammarstr&ouml;m,
-Stephen Levinson, Hannah Haynie, Jeremy Collins, Nicholas Evans, and Hanna Fricke.</p>
 
 <p>
 <table class="table table-condensed table-nonfluid">
