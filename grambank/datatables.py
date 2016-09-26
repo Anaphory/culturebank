@@ -43,7 +43,7 @@ class GrambankLanguages(Languages):
             Col(self,
                 'longitude',
                 sDescription='<small>The geographic longitude</small>'),
-            MacroareaCol(self, 'macroarea', GrambankLanguage),
+            MacroareaCol(self, 'region', GrambankLanguage),
             FamilyLinkCol(self, 'family', GrambankLanguage),
         ]
 
@@ -234,7 +234,9 @@ class FamilyMacroareaCol(Col):
     __kw__ = {'bSearchable': False, 'bSortable': False}
 
     def format(self, item):
-        return ", ".join(set([lg.macroarea for lg in item.languages]))
+        return ", ".join(set([lg.macroarea
+                              for lg in item.languages
+                              if lg.macroarea]))
 
     
 class Families(Familys):    
@@ -242,7 +244,7 @@ class Families(Familys):
         return [
             LinkCol(self, 'name'),
             GlottologUrlCol(self, 'description', sTitle='Glottolog'),
-            FamilyMacroareaCol(self, 'macroarea'),
+            FamilyMacroareaCol(self, 'region'),
             LanguageCountCol(self, 'number of languages in GramBank'),
         ]
 

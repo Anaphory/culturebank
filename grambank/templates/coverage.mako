@@ -11,7 +11,7 @@
             <th colspan="3" style="text-align: center">Families or isolates with grammar sketch</th>
         </tr>
         <tr>
-            <th>Macroarea</th>
+            <th>Region</th>
             <th>Glottolog</th>
             <th>GramBank</th>
             <th>Coverage</th>
@@ -61,7 +61,7 @@
         <th>Glottolog</th>
         <th>GramBank</th>
         <th>Coverage</th>
-        <th>Macroareas</th>
+        <th>Regions</th>
         <th>Glottolog</th>
         <th>GramBank</th>
         <th>Coverage</th>
